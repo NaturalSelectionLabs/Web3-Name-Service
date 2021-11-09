@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import config from '../config';
 import got from 'got';
+import logger from '../utils/logger';
 
 let idNo = 0;
 
@@ -18,7 +19,7 @@ async function checkInfuraID(id: string) {
             return true;
         }
     } catch (e) {
-        console.log(e);
+        logger.error(e);
     }
     return false;
 }

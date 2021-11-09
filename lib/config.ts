@@ -11,6 +11,7 @@ export default {
     ],
     redis: {
         url: process.env.REDIS_URL || 'redis://localhost:6379/',
+        ensExat: 60 * 60, // 1 hour
     },
     rns: {
         test: true,
