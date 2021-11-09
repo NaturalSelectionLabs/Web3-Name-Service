@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import getProvider from '../utils/provider';
+import getProvider from '../provider';
 
 const provider = getProvider();
 

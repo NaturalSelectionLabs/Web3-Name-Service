@@ -1,6 +1,6 @@
 import type Koa from 'koa';
-import RNS from '../services/rns';
-import ENS from '../services/ens';
+import RNS from '../utils/services/rns';
+import ENS from '../utils/services/ens';
 
 export default async (ctx: Koa.Context) => {
     const address = ctx.params.address;

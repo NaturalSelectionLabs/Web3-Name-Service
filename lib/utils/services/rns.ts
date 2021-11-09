@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
-import config from '../config';
+import config from '../../config';
 import { utils } from 'ethers/lib';
-import getProvider from '../utils/provider';
+import getProvider from '../provider';
 
 async function callRNSContract<T>(
     method: string,
