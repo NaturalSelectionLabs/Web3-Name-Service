@@ -1,0 +1,54 @@
+{
+    "name": "rss3-name-service",
+    "version": "0.1.0",
+    "description": "",
+    "main": "lib/index.ts",
+    "scripts": {
+        "watch-ts": "tsc -w",
+        "watch-node": "nodemon dist/index.js",
+        "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+        "dev": "npm run watch",
+        "build": "tsc",
+        "deploy": "node dist/index.js",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NaturalSelectionLabs/RSS3-Name-Service.git"
+    },
+    "keywords": [
+        "rss3"
+    ],
+    "author": "NaturalSelectionLabs",
+    "bugs": {
+        "url": "https://github.com/NaturalSelectionLabs/RSS3-Name-Service/issues"
+    },
+    "homepage": "https://github.com/NaturalSelectionLabs/RSS3-Name-Service#readme",
+    "dependencies": {
+        "@koa/cors": "3.1.0",
+        "@koa/router": "10.0.0",
+        "dotenv": "9.0.2",
+        "ethers": "5.4.4",
+        "got": "11.8.2",
+        "ioredis": "4.27.9",
+        "koa": "2.13.1",
+        "winston": "3.3.3"
+    },
+    "devDependencies": {
+        "@types/ioredis": "4.27.2",
+        "@types/koa": "2.13.1",
+        "@types/koa__cors": "3.0.2",
+        "@types/koa__router": "8.0.4",
+        "@types/node": "15.0.2",
+        "concurrently": "6.3.0",
+        "husky": "6.0.0",
+        "lint-staged": "11.0.0",
+        "nodemon": "2.0.7",
+        "prettier": "2.3.0",
+        "ts-node": "10.1.0",
+        "typescript": "4.2.4"
+    }
+}

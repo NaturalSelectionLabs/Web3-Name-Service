@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "*": ["node_modules/*", "lib/types/*"]
+        },
+        "plugins": [{ "transform": "typescript-is/lib/transform-inline/transformer" }]
+    },
+    "include": ["lib/**/*"],
+    "ts-node": {
+        "files": true
+    }
+}
