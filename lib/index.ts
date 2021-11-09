@@ -2,8 +2,8 @@ import Koa from 'koa';
 import Router from '@koa/router';
 import cors from '@koa/cors';
 
-// import NameInfo from './routes/name';
-// import AddressInfo from './routes/address';
+import NameInfo from './routes/name';
+import AddressInfo from './routes/address';
 
 import Header from './middleware/header';
 
@@ -28,8 +28,8 @@ app.use(cors());
 // router
 const router = new Router();
 
-// router.get('/name/:name', NameInfo);
-// router.get('/address/:address', AddressInfo);
+router.get('/name/:name', NameInfo);
+router.get('/address/:address', AddressInfo);
 
 app.use(router.routes()).use(router.allowedMethods());
 
