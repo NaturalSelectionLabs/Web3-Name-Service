@@ -1,11 +1,17 @@
 # Web3 Name Service
 
-> A compatible and inclusive name service
+> A compatible and inclusive name service for the web3 world
 
 ## Supported Protocols
 
 - [RNS](https://ropsten.etherscan.io/address/0x63CfEB343975116Ec2fc27125609da236D066615): *.rss3
 - [ENS](https://ens.domains): *.eth
+
+In planning:
+
+- [Mirror](https://mirror.xyz/): *.mirror
+- [Twitter](https://twitter.com): *.twitter
+- [Discord](https://discord.com/): *.discord
 
 ## Usage
 
