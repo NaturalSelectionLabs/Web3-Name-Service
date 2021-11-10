@@ -7,8 +7,8 @@
 
 ## Supported Protocols
 
-- [RNS](https://ropsten.etherscan.io/address/0x63CfEB343975116Ec2fc27125609da236D066615)
-- [ENS](https://ens.domains)
+- [RNS](https://ropsten.etherscan.io/address/0x63CfEB343975116Ec2fc27125609da236D066615): *.rss3
+- [ENS](https://ens.domains): *.eth
 
 ## Usage
 
@@ -22,7 +22,7 @@ Get information by address
 
 ## Examples
 
-Request by RNS name: https://rss3.domains/name/usagi
+Request by RNS name: https://rss3.domains/name/usagi.rss3
 
 Request by ENS name: https://rss3.domains/name/usagii.eth
 
@@ -32,7 +32,7 @@ Returned information:
 
 ```json
 {
-    "rnsName": "usagi",
+    "rnsName": "usagi.rss3",
     "ensName": "usagii.eth",
     "address": "0xDA048BED40d40B1EBd9239Cdf56ca0c2F018ae65"
 }

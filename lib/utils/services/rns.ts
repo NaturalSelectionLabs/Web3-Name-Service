@@ -38,10 +38,6 @@ function sha3HexAddress(addr: string) {
     return utils.keccak256('0x' + res);
 }
 
-const addrCache: {
-    [key: string]: string;
-} = {};
-
 export default {
     async addr2Name(addr: string) {
         let name = await redis.get(`rns-addr2Name-${addr}`);
@@ -53,7 +49,7 @@ export default {
             const node = utils.keccak256(utils.defaultAbiCoder.encode(['bytes32', 'bytes32'], [reverseNode, addrHex]));
             name = (await callRNSContract<string>('name', node))
                 .toLowerCase()
-                .replace(config.rns.suffix, '');
+                .replace(new RegExp(`\\${config.rns.suffix}$`), '.rss3');
             if (name) {
                 await redis.set(`rns-addr2Name-${addr}`, name);
                 await redis.set(`rns-name2Addr-${name}`, addr);
@@ -67,8 +63,8 @@ export default {
         if (addr) {
             return addr;
         } else {
-            name = (name + config.rns.suffix).toLowerCase();
-            addr = await callRNSContract<string>('addr', utils.namehash(name));
+            const rnsInsideName = name.toLowerCase().replace(new RegExp(`\.rss3$`), config.rns.suffix);
+            addr = await callRNSContract<string>('addr', utils.namehash(rnsInsideName));
             if (addr) {
                 await redis.set(`rns-name2Addr-${name}`, addr);
                 await redis.set(`rns-addr2Name-${addr}`, name);
