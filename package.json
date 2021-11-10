@@ -1,5 +1,5 @@
 {
-    "name": "rss3-name-service",
+    "name": "web3-name-service",
     "version": "0.1.0",
     "description": "",
     "main": "lib/index.ts",
@@ -17,16 +17,19 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/NaturalSelectionLabs/RSS3-Name-Service.git"
+        "url": "git+https://github.com/NaturalSelectionLabs/Web3-Name-Service.git"
     },
     "keywords": [
-        "rss3"
+        "web3",
+        "rss3",
+        "rns",
+        "ens"
     ],
     "author": "NaturalSelectionLabs",
     "bugs": {
-        "url": "https://github.com/NaturalSelectionLabs/RSS3-Name-Service/issues"
+        "url": "https://github.com/NaturalSelectionLabs/Web3-Name-Service/issues"
     },
-    "homepage": "https://github.com/NaturalSelectionLabs/RSS3-Name-Service#readme",
+    "homepage": "https://github.com/NaturalSelectionLabs/Web3-Name-Service#readme",
     "dependencies": {
         "@koa/cors": "3.1.0",
         "@koa/router": "10.0.0",

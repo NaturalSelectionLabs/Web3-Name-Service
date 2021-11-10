@@ -1,7 +1,4 @@
-<p align="center">
-<img src="https://rss3.mypinata.cloud/ipfs/QmUG6H3Z7D5P511shn7sB4CPmpjH5uZWu4m5mWX7U3Gqbu" alt="RSS3" width="300">
-</p>
-<h1 align="center">RSS3 Name Service</h1>
+# Web3 Name Service
 
 > A compatible and inclusive name service
 
