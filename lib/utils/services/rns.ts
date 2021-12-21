@@ -4,17 +4,10 @@ import { utils } from 'ethers/lib';
 import getProvider from '../provider';
 import redis from '../redis';
 
-async function callRNSContract<T>(
-    method: string,
-    ...args: any
-): Promise<T> {
-    const provider = getProvider(config.rns.test ? 'ropsten' : 'homestead');
+async function callRNSContract<T>(method: string, ...args: any): Promise<T> {
+    const provider = await getProvider(config.rns.test ? 'ropsten' : 'homestead');
 
-    const contract = await new ethers.Contract(
-        getRNSContract(),
-        config.rns.contract.resolver,
-        provider,
-    );
+    const contract = await new ethers.Contract(getRNSContract(), config.rns.contract.resolver, provider);
     return contract[method](...args);
 }
 
