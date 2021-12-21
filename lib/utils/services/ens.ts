@@ -2,14 +2,13 @@ import getProvider from '../provider';
 import redis from '../redis';
 import config from '../../config';
 
-const provider = getProvider();
-
 export default {
     async addr2Name(addr: string) {
         let name = await redis.get(`ens-addr2Name-${addr}`);
         if (name) {
             return name;
         } else {
+            const provider = await getProvider();
             const name = await provider.lookupAddress(addr);
             if (name) {
                 await redis.set(`ens-addr2Name-${addr}`, name, config.redis.ensExat);
@@ -24,6 +23,7 @@ export default {
         if (addr) {
             return addr;
         } else {
+            const provider = await getProvider();
             addr = await provider.resolveName(name);
             if (addr) {
                 await redis.set(`ens-name2Addr-${name}`, addr, config.redis.ensExat);
