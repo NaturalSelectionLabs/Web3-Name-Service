@@ -1,6 +1,7 @@
 import getProvider from '../provider';
 import redis from '../redis';
 import config from '../../config';
+import url from 'url';
 
 export default {
     async addr2Name(addr: string) {
@@ -24,7 +25,7 @@ export default {
             return addr;
         } else {
             const provider = await getProvider();
-            addr = await provider.resolveName(name);
+            addr = await provider.resolveName(url.domainToUnicode(name));
             if (addr) {
                 await redis.set(`ens-name2Addr-${name}`, addr, config.redis.ensExat);
                 await redis.set(`ens-addr2Name-${addr}`, name, config.redis.ensExat);
