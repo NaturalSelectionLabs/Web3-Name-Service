@@ -3,16 +3,18 @@ dotenv.config();
 
 export default {
     infuraId: [
-//        '76af1228cdf345d2bff6a9c0f35112e1',
-//        'cddf9c43e60e4fee9dd875f3f88f6c0a',
-//        'b2a1e1f49ce04af49b304cb281364053',
-//        'a34494c90ca24f30b003a41b5a4c7752',
-//        'bad1e9a0ade24a0da20859746c54ad32',
+        '76af1228cdf345d2bff6a9c0f35112e1',
+        'cddf9c43e60e4fee9dd875f3f88f6c0a',
+        'b2a1e1f49ce04af49b304cb281364053',
+        'a34494c90ca24f30b003a41b5a4c7752',
+        'bad1e9a0ade24a0da20859746c54ad32',
         'd6760e62b67f4937ba1ea2691046f06d',
         '460f40a260564ac4a4f4b3fffb032dad',
         'e4588d11d73d47749c72f5f542832808',
         '2717afb6bf164045b5d5468031b93f87',
         '96ce12f4a29c44699587732ebf110b75',
+        '2b413b4da2f145e98b8858a95e0ab0c1',
+        '2bad3cf78c1a455bbb1f765a846a6f6b',
     ],
     redis: {
         url: process.env.REDIS_URL || 'redis://localhost:6379/',
