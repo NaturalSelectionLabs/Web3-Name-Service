@@ -223,4 +223,7 @@ export default {
             ],
         },
     },
+    das: {
+        apiUrl: 'https://indexer-not-use-in-production-env.da.systems'
+    }
 };
