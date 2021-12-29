@@ -6,6 +6,7 @@
 
 - [RNS](https://ropsten.etherscan.io/address/0x63CfEB343975116Ec2fc27125609da236D066615): *.rss3
 - [ENS](https://ens.domains): *.eth
+- [DAS](https://da.systems): *.bit
 
 In planning:
 
@@ -17,7 +18,7 @@ In planning:
 
 `/name/:name`
 
-Get information by RNS or ENS name
+Get information by RNS, DAS or ENS name
 
 `/address/:address`
 
@@ -29,6 +30,8 @@ Request by RNS name: https://rss3.domains/name/usagi.rss3
 
 Request by ENS name: https://rss3.domains/name/usagii.eth
 
+Request by DAS name: https://rss3.domains/name/usagii.bit
+
 Request by address: https://rss3.domains/address/0xDA048BED40d40B1EBd9239Cdf56ca0c2F018ae65
 
 Returned information:
@@ -37,6 +40,7 @@ Returned information:
 {
     "rnsName": "usagi.rss3",
     "ensName": "usagii.eth",
+    "dasName": "usagii.bit",
     "address": "0xDA048BED40d40B1EBd9239Cdf56ca0c2F018ae65"
 }
 ```
