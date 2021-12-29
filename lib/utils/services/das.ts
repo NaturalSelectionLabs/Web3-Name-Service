@@ -12,7 +12,11 @@ export default {
         if (name) {
             return name;
         }
-        else {
+
+        try {
+            const das = new Das({
+                url: config.das.apiUrl,
+            });
             const name = await das.reverseRecord({
                 type: 'blockchain',
                 key_info: {
@@ -26,22 +30,36 @@ export default {
                 await redis.set(`das-name2Addr-${name}`, addr, config.redis.ensExat);
                 return name;
             }
+            else {
+                return null;
+            }
         }
-        return null;
+        catch (e) {
+            return null;
+        }
     },
     async name2Addr(name: string) {
         const addr = await redis.get(`das-name2Addr-${name}`);
         if (addr) {
             return addr;
         }
-        else {
+
+        try {
+            const das = new Das({
+                url: config.das.apiUrl,
+            });
             const accountInfo = await das.account(name);
             // about owner_algorithm_id reference: https://github.com/DeAccountSystems/das-account-indexer/blob/main/API.md#get-account-basic-info
             if (accountInfo && (accountInfo.owner_algorithm_id === 3 || accountInfo.owner_algorithm_id === 5)) {
                 await redis.set(`das-name2Addr-${name}`, accountInfo.owner_key, config.redis.ensExat);
                 return accountInfo.owner_key;
             }
+            else {
+                return null;
+            }
         }
-        return null;
+        catch (e) {
+            return null;
+        }
     },
 };
