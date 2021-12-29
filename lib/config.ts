@@ -223,4 +223,7 @@ export default {
             ],
         },
     },
+    das: {
+        apiUrl: 'https://indexer-basic.da.systems'
+    }
 };
