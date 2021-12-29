@@ -18,23 +18,26 @@ export default async (ctx: Koa.Context) => {
         case 'rss3':
             rnsName = name;
             address = await RNS.name2Addr(rnsName);
-            if (address) {
-                address = utils.getAddress(address);
-                ensName = await ENS.addr2Name(address);
-            }
             break;
         case 'eth':
             ensName = name;
             address = await ENS.name2Addr(ensName);
-            if (address) {
-                address = utils.getAddress(address);
-                rnsName = await RNS.addr2Name(address);
-            }
             break;
         case 'bit':
             dasName = name;
             address = await DAS.name2Addr(dasName);
             break;
+    }
+    if (address) {
+        if (!rnsName) {
+            rnsName = await RNS.addr2Name(address);
+        }
+        if (!ensName) {
+            ensName = await ENS.addr2Name(address);
+        }
+        if (!dasName) {
+            dasName = await DAS.addr2Name(address);
+        }
     }
 
     ctx.body = {
