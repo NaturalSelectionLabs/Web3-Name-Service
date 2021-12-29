@@ -29,6 +29,7 @@ export default async (ctx: Koa.Context) => {
             break;
     }
     if (address) {
+        address = utils.getAddress(address);
         if (!rnsName) {
             rnsName = await RNS.addr2Name(address);
         }
