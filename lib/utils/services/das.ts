@@ -14,9 +14,6 @@ export default {
         }
 
         try {
-            const das = new Das({
-                url: config.das.apiUrl,
-            });
             const name = await das.reverseRecord({
                 type: 'blockchain',
                 key_info: {
@@ -45,9 +42,6 @@ export default {
         }
 
         try {
-            const das = new Das({
-                url: config.das.apiUrl,
-            });
             const accountInfo = await das.account(name);
             // about owner_algorithm_id reference: https://github.com/DeAccountSystems/das-account-indexer/blob/main/API.md#get-account-basic-info
             if (accountInfo && (accountInfo.owner_algorithm_id === 3 || accountInfo.owner_algorithm_id === 5)) {
