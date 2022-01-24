@@ -3,9 +3,9 @@ import config from '../config';
 import got from 'got';
 import logger from '../utils/logger';
 
-async function checkInfuraID(id: string) {
+async function checkJsonRPCEndpoint(url: string) {
     try {
-        const res = await got.post(`https://mainnet.infura.io/v3/${id}`, {
+        const res = await got.post(url, {
             json: {
                 jsonrpc: '2.0',
                 id: 1,
@@ -20,6 +20,10 @@ async function checkInfuraID(id: string) {
         logger.error(e);
     }
     return false;
+}
+
+async function checkInfuraID(id: string) {
+    return checkJsonRPCEndpoint(`https://mainnet.infura.io/v3/${id}`);
 }
 
 async function getInfuraIdNo() {
@@ -40,14 +44,19 @@ async function getInfuraIdNo() {
 const providers: {
     [key: string]: ethers.providers.InfuraProvider;
 } = {};
+const ourMainnetJsonRPCProvider = new ethers.providers.JsonRpcProvider(config.jsonRPCUrl, 'homestead');
 
 export default async function getProvider(network = 'homestead') {
-    const idNo = await getInfuraIdNo();
-    const KEY = `${network}-${idNo}`;
-    if (!providers[KEY]) {
-        providers[KEY] = new ethers.providers.InfuraProvider(network, {
-            projectId: config.infuraId[idNo],
-        });
+    if (network === 'homestead' && await checkJsonRPCEndpoint(config.jsonRPCUrl)) {
+        return ourMainnetJsonRPCProvider;
+    } else {
+        const idNo = await getInfuraIdNo();
+        const KEY = `${network}-${idNo}`;
+        if (!providers[KEY]) {
+            providers[KEY] = new ethers.providers.InfuraProvider(network, {
+                projectId: config.infuraId[idNo],
+            });
+        }
+        return providers[KEY];
     }
-    return providers[KEY];
 }
