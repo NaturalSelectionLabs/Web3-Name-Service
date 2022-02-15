@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-    jsonRPCUrl: "http://10.124.0.23:8545",
+    jsonRPCUrl: process.env.JSON_RPC_URL || "http://10.124.0.23:8545",
     infuraId: [
         '76af1228cdf345d2bff6a9c0f35112e1',
         'cddf9c43e60e4fee9dd875f3f88f6c0a',
