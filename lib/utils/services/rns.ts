@@ -31,36 +31,54 @@ function sha3HexAddress(addr: string) {
     return utils.keccak256('0x' + res);
 }
 
+const namespace = 'rns';
+
+const getName = async (addr: string) => {
+    const reverseNode = '0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2';
+    const addrHex = sha3HexAddress(addr.toLowerCase());
+    const node = utils.keccak256(utils.defaultAbiCoder.encode(['bytes32', 'bytes32'], [reverseNode, addrHex]));
+    const name = (await callRNSContract<string>('name', node))
+        .toLowerCase()
+        .replace(new RegExp(`\\${config.rns.suffix}$`), '.rss3') || '';
+    if (name) {
+        await redis.set(`${namespace}-name2Addr-${name}`, addr);
+    }
+    await redis.set(`${namespace}-addr2Name-${addr}`, name);
+    return name;
+}
+
+const getAddress = async (name: string) => {
+    const rnsInsideName = name.toLowerCase().replace(new RegExp(`\.rss3$`), config.rns.suffix);
+    const addr = await callRNSContract<string>('addr', utils.namehash(rnsInsideName)) || '';
+    if (addr) {
+        await redis.set(`${namespace}-addr2Name-${addr}`, name);
+    }
+    await redis.set(`${namespace}-name2Addr-${name}`, addr);
+    return addr;
+}
+
 export default {
     async addr2Name(addr: string) {
-        let name = await redis.get(`rns-addr2Name-${addr}`);
-        if (name) {
-            return name;
+        let name = await redis.get(`${namespace}-addr2Name-${addr}`);
+        if (name !== null) {
+            getName(addr);
+            return name || null;
         } else {
-            const reverseNode = '0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2';
-            const addrHex = sha3HexAddress(addr.toLowerCase());
-            const node = utils.keccak256(utils.defaultAbiCoder.encode(['bytes32', 'bytes32'], [reverseNode, addrHex]));
-            name = (await callRNSContract<string>('name', node))
-                .toLowerCase()
-                .replace(new RegExp(`\\${config.rns.suffix}$`), '.rss3');
+            name = await getName(addr);
             if (name) {
-                await redis.set(`rns-addr2Name-${addr}`, name);
-                await redis.set(`rns-name2Addr-${name}`, addr);
                 return name;
             }
         }
         return null;
     },
     async name2Addr(name: string) {
-        let addr = await redis.get(`rns-name2Addr-${name}`);
-        if (addr) {
-            return addr;
+        let addr = await redis.get(`${namespace}-name2Addr-${name}`);
+        if (addr !== null) {
+            getAddress(name);
+            return addr || null;
         } else {
-            const rnsInsideName = name.toLowerCase().replace(new RegExp(`\.rss3$`), config.rns.suffix);
-            addr = await callRNSContract<string>('addr', utils.namehash(rnsInsideName));
+            addr = await getAddress(name);
             if (addr) {
-                await redis.set(`rns-name2Addr-${name}`, addr);
-                await redis.set(`rns-addr2Name-${addr}`, name);
                 return addr;
             }
         }
