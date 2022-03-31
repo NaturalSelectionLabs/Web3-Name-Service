@@ -6,13 +6,14 @@ import { utils } from 'ethers/lib';
 
 export default async (ctx: Koa.Context) => {
     let name: string = ctx.params.name;
-    const service = name.split('.')[1];
+    const nameSplits = name.split('.');
+    const tld = nameSplits.length > 1 ? nameSplits.pop() : undefined; // Get the TLD(Top Level Domain)
 
     let address;
     let rnsName: string | null = null;
     let ensName: string | null = null;
     let dasName: string | null = null;
-    switch (service) {
+    switch (tld) {
         case undefined:
             name += '.rss3';
         case 'rss3':
